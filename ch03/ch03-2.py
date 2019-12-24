@@ -7,12 +7,7 @@ def myLineAdjust(image, k, b):
 
     for row in range(height):
         for col in range(width):
-            val = image[row][col]
-            newVal = val * k + b
-            if newVal > 255 :
-                image[row][col] = 255
-            else:
-                image[row][col] = newVal
+            image[row][col] = 255 if image[row][col] * k + b > 255 else image[row][col] * k + b
 
     return image
 
