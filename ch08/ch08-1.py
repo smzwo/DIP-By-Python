@@ -1,45 +1,7 @@
-import os
-from PIL import Image
-import glob
-
-DIR = r'C:\Users\17806\Desktop\img/'
-
-
-class Compress_Picture(object):
-    def __init__(self):
-        # 图片格式，可以换成.bpm等
-            self.file = '.JPG'
-
-        # 图片压缩批处理
-
-    def compressImage(self):
-
-        for filename in glob.glob('%s%s%s' % (DIR, '*', self.file)):
-            # print(filename)
-            # 打开原图片压缩
-            sImg = Image.open(filename)
-            w, h = sImg.size
-            print(w, h)
-            dImg = sImg.resize((1280, 1080), Image.ANTIALIAS)  # 设置压缩尺寸和选项，注意尺寸要用括号
-            # 小米6: 1008 * 754
-            # 320*240  640*480 800*600 1024*768 1152*864 1280*960 1400*1050 1600*1200 2048*1536
-            # 如果不存在目的目录则创建一个
-            comdic = "%scompress/" % DIR
-            if not os.path.exists(comdic):
-                os.makedirs(comdic)
-
-                # 压缩图片路径名称
-            f1 = filename.split('/')
-            f1 = f1[-1].split('\\')
-            f2 = f1[-1].split('.')
-            f2 = '%s%s1%s' % (comdic, f2[0], self.file)
-            # print(f2)
-            dImg.save(f2)  # save这个函数后面可以加压缩编码选项JPEG之类的
-            print("%s compressed succeeded" % f1[-1])
-
-
-if __name__ == "__main__":
-
-    obj = Compress_Picture()
-
-    obj.compressImage()
+#jpg图片的压缩
+import cv2
+img = cv2.imread('cat.jpg',1)
+#对于jpg文件的压缩，第三个参数是压缩质量
+cv2.imwrite('D:\imageTest.jpeg',img,[cv2.IMWRITE_JPEG_QUALITY,90])
+#1M 100K 10K 图片质量的范围是0-100 有损压缩
+#jpg图片的额压缩压缩质量参数数值越小，压缩比越高
